@@ -1,8 +1,8 @@
-const RouterStorage = require('./router/storage');
-const App = require('./app');
-const isClass = require('./helper/is-class');
-const each = require('./helper/each');
-const execGenerator = require('./helper/exec-generator');
+const RouterStorage = require('../router/storage');
+const App = require('../app');
+const isClass = require('../helper/is-class');
+const each = require('../helper/each');
+const execGenerator = require('../helper/exec-generator');
 
 
 module.exports = function (request, response) {
