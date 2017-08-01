@@ -46,6 +46,9 @@
     "watch": "webpack --watch --config test/webpack.config.js",
     "dev": "webpack --config test/webpack.config.js"
   },
+  "keywords": [
+    "gap", "gap.js", "mvc", "mvc-framework", "isomorphic"
+  ],
   "author": "Dmitriy Tsirulnikov <leggnom@gmail.com>",
   "license": "MIT"
 }
