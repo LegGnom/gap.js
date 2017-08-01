@@ -36,7 +36,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "nunjucks-loader": "^2.4.8",
-    "webpack": "^3.2.0",
+    "webpack": "^3.2.0"
   },
   "scripts": {
     "test": "rimraf lib && npm run build && mocha",
