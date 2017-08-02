@@ -3,7 +3,7 @@
 Запускаем сервер одной командой 
  
 ```javascript
-const Server = require('mvc/server');
+const Server = require('gap.js/server');
 
 Server.run();
 ```
@@ -14,8 +14,8 @@ Server.run();
 
 ### Изменение настроек сервера с помощью конфигов 
 ```javascript
-const Server = require('mvc/server');
-const Config = require('mvc/config');
+const Server = require('gap.js/server');
+const Config = require('gap.js/config');
 
 Config.set('server.host', 'site.com');
 Config.set('server.port', 80);
@@ -27,7 +27,7 @@ Server.run();
 
 ### Принудительное задание настроек сервера: 
 ```javascript
-const Server = require('mvc/server');
+const Server = require('gap.js/server');
 
 Server.run('site.com', 80, 'https');
 ```

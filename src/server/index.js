@@ -48,7 +48,7 @@ class Server {
 
         logger.info('run %s://%s:%s/', [protocol, host, port]);
 
-        App.setTemplateEngine(this.getTemplateEngine())
+        App.setTemplateEngine(this.getTemplateEngine());
         this[SERVER_DRIVER](protocol).listen(port, host);
     }
 

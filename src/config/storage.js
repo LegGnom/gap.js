@@ -1,6 +1,6 @@
 module.exports = {
 
-    // DEBUG: 1,
+    DEBUG: 0,
 
     LOGGER: [0,1,2,3,4],
 

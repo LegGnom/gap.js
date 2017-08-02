@@ -1,7 +1,7 @@
 module.exports = {
     attachEvent: require('./attach-event'),
     clearSlashes: require('./clear-slashes'),
-    dataForm: require('./data-form'),
+    DataForm: require('./data-form'),
     dictToQueryString: require('./dict-to-query-string'),
     dictToStringJSON: require('./dict-to-string-json'),
     each: require('./each'),

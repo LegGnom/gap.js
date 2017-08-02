@@ -14,7 +14,7 @@ if (isNode()) {
 
 
 class Request {
-    get(path, body, headers, files) {
+    get(path, body, headers) {
         return this.send('GET', path, body, headers);
     }
 

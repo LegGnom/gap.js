@@ -48,7 +48,7 @@ Router.get('/<name>/', function(request){
 ### Request.create(http_request=null, fields=null, files=null, params=null)
 Создает новый объект Request из текущего 
 ```javascript
-const Router = require('mvc/router');
+const Router = require('gap.js/router');
 Router.get('/', function(request, response) {
     
     let new_request = request.create(null, null. null, {

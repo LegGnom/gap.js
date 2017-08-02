@@ -4,8 +4,8 @@
 
 
 ```javascript
-const Server = require('../src/server/index');
-const Router = require('../src/router');
+const Server = require('gap.js/server/index');
+const Router = require('gap.js/router');
 
 
 const mongoose = require('mongoose');

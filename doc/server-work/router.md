@@ -3,7 +3,7 @@
 Простой пример обработки http запроса по url
 
 ```javascript
-const Router = require('mvc/router');
+const Router = require('gap.js/router');
 
 Router.get("/", function(request, response) {
     response.send("Hello world");
@@ -21,7 +21,7 @@ Router.get("/", function(request, response) {
   
 
 ```javascript
-const Router = require('mvc/router');
+const Router = require('gap.js/router');
 
 class HelloWorld {
     constructor(request, response) {
@@ -36,8 +36,8 @@ Router.get("/", HelloWorld);
 
 
 ```javascript
-const Router = require('mvc/router');
-const Controller = require('mvc/controller');
+const Router = require('gap.js/router');
+const Controller = require('gap.js/controller');
 
 class HelloWorld extends Controller {
     constructor(request, response) {
@@ -65,7 +65,7 @@ Router.get("/", HelloWorld);
 Определение при помощи регулярных выражений
 
 ```javascript
-const Router = require('mvc/router');
+const Router = require('gap.js/router');
 Router.get(/^(.+)/, function() {
     // ...
 });
@@ -98,7 +98,7 @@ HTTP методы определяют тип запроса.
 ### Router.route(key, methods, handler)
 
 ```javascript
-const Router = require('mvc/router');
+const Router = require('gap.js/router');
 
 Router.get("/", function(request, ['GET'], response) {
     response.send("Hello world");
@@ -109,7 +109,7 @@ Router.get("/", function(request, ['GET'], response) {
 ### Router.any(key, handler)
 Для того чтобы обработать любой тип запроса можно воспользоваться методом **any** 
 ```javascript
-const Router = require('mvc/router');
+const Router = require('gap.js/router');
 
 Router.get("/", function(request, response) {
     response.send("Hello world");
@@ -122,7 +122,7 @@ Router.get("/", function(request, response) {
 определяя их снова и снова.
 
 ```javascript
-const Router = require('mvc/router');
+const Router = require('gap.js/router');
 
 class ApiHandler {
     // ...

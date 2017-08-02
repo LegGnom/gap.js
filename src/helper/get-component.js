@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function get_component(node, component_name=false) {
+module.exports = function getComponent(node, component_name=false) {
     let component = null;
     let component_list = node.__components__ || [];
 

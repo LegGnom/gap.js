@@ -2,7 +2,10 @@
 
 const each = require('./each');
 
-
+/**
+ * Аналог FormDate
+ * @type {module.DataForm}
+ */
 module.exports = class DataForm {
     constructor(node) {
         this._ns = [];

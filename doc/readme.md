@@ -14,6 +14,7 @@
  
 ## Подключаем БД
 * [Mongoose](db/mongoose.md)
+* [Sequelize](db/sequelize.md)
 
 ## Модули
 * [App](modules/app.md)
@@ -24,13 +25,11 @@
 * [dom](modules/dom.md)
 * [EventEmitter](modules/event-emitter.md)
 * [Form](modules/form.md)
-* helper
-* http
-* logger
-* make
-* Proxy
-* Request
-* Router
-* Server
-* View
-* Wait
+* [helper](modules/helper.md)
+* [Logger](modules/logger.md)
+* [Proxy](modules/proxy.md)
+* [Request](modules/request.md)
+* [Router](modules/router.md)
+* [Server](modules/server.md)
+* [View](modules/view.md)
+* [Wait](modules/wait.md)
