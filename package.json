@@ -1,6 +1,6 @@
 {
   "name": "gap.js",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "",
   "main": "./lig/index.js",
   "engines": {
@@ -32,22 +32,26 @@
     "mocha": "^3.5.0",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
+    "nunjucks-loader": "^2.4.8",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "nunjucks-loader": "^2.4.8",
-    "webpack": "^3.2.0"
+    "webpack": "^3.4.1"
   },
   "scripts": {
     "test": "rimraf lib && npm run build && mocha",
     "build": "rimraf lib && babel src --out-dir .",
     "prepublish": "npm run build",
-    "start": "nodemon test/index.js",
-    "watch": "webpack --watch --config test/webpack.config.js",
-    "dev": "webpack --config test/webpack.config.js"
+    "start": "nodemon test-app/index.js",
+    "watch": "webpack --watch --config test-app/webpack.config.js",
+    "dev": "webpack --config test-app/webpack.config.js"
   },
   "keywords": [
-    "gap", "gap.js", "mvc", "mvc-framework", "isomorphic"
+    "gap",
+    "gap.js",
+    "mvc",
+    "mvc-framework",
+    "isomorphic"
   ],
   "author": "Dmitriy Tsirulnikov <leggnom@gmail.com>",
   "license": "MIT"
