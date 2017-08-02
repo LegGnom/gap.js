@@ -50,7 +50,7 @@ module.exports = {
 
 
     /**
-     * Удалить обертку у элемента
+     * Удалить обертку (родителя) у элемента
      * @param element
      */
     unwrap(element) {

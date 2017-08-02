@@ -84,7 +84,7 @@ class Controller {
         this[HTTP_RESPONSE].renderString.apply(this[HTTP_RESPONSE], arguments);
     }
 
-    setCharset(cahrset) {
+    setCharset(charset) {
         this[HTTP_RESPONSE].setCharset.apply(this[HTTP_RESPONSE], arguments);
     }
 
@@ -112,7 +112,7 @@ class Controller {
         this[HTTP_RESPONSE].setBody.apply(this[HTTP_RESPONSE], arguments);
     }
 
-    setCookie(body) {
+    setCookie(name, value, expires=false, path='/', domain=false) {
         this[HTTP_RESPONSE].setCookie.apply(this[HTTP_RESPONSE], arguments);
     }
 
@@ -128,11 +128,11 @@ class Controller {
         return this[HTTP_RESPONSE].getHeader.apply(this[HTTP_RESPONSE], arguments);
     }
 
-    getCookie(cookie_name) {
+    getCookie(cookie_name, _default) {
         return this[HTTP_REQUEST].getCookie.apply(this[HTTP_REQUEST], arguments);
     }
 
-    getCookies(cookie_name) {
+    getCookies() {
         return this[HTTP_REQUEST].cookies;
     }
 

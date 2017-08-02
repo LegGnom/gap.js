@@ -22,6 +22,11 @@ class EventEmitter {
     }
 
 
+    /**
+     * Устанавливает событие, срабатывает 1 раз
+     * @param event_name
+     * @param handler
+     */
     once(event_name, handler) {
         let once_handler = function() {
             handler.apply({}, arguments);

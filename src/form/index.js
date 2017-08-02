@@ -6,7 +6,7 @@ const Middleware = require('./middleware');
 
 
 const Form = {
-    create(fields) {
+    create(fields_object) {
         return function (form) {
             return new Middleware(form, fields);
         };

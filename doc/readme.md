@@ -19,12 +19,11 @@
 * [App](modules/app.md)
 * [Client](modules/client.md)
 * [Component](modules/component.md)
-* Config
-* Controller
-* dom
-* EventEmitter
-* FileStorage
-* Form
+* [Config](modules/config.md)
+* [Controller](modules/controller.md)
+* [dom](modules/dom.md)
+* [EventEmitter](modules/event-emitter.md)
+* [Form](modules/form.md)
 * helper
 * http
 * logger

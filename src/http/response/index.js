@@ -87,7 +87,7 @@ class Response extends Wait {
 
 
     setCharset(charset) {
-        this[RESPONSE_DATA] = charset;
+        this[HTTP_RESPONSE].charset = charset;
     }
 
 

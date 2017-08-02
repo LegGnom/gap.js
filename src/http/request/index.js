@@ -41,8 +41,8 @@ class Request {
         return this[COOKIES];
     }
 
-    getCookie(cookie_name) {
-        return this[COOKIES][cookie_name];
+    getCookie(cookie_name, _default) {
+        return this[COOKIES][cookie_name] || _default;
     }
 
     get params() {
