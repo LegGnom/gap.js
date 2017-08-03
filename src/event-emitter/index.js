@@ -2,10 +2,12 @@
 
 const each = require('../helper/each');
 
+const EVENT_STORAGE = Symbol('event storage');
+
 
 class EventEmitter {
     constructor() {
-        this._events = {};
+        this[EVENT_STORAGE] = {};
     }
 
     /**
@@ -14,11 +16,11 @@ class EventEmitter {
      * @param handler
      */
     on(event_name, handler) {
-        if (!this._events.hasOwnProperty(event_name)) {
-            this._events[event_name] = [];
+        if (!this[EVENT_STORAGE].hasOwnProperty(event_name)) {
+            this[EVENT_STORAGE][event_name] = [];
         }
 
-        this._events[event_name].push(handler);
+        this[EVENT_STORAGE][event_name].push(handler);
     }
 
 
@@ -42,8 +44,8 @@ class EventEmitter {
      * @param params
      */
     emit(event_name, ...params) {
-        if (this._events.hasOwnProperty(event_name)) {
-            this._events[event_name].forEach(function (handler) {
+        if (this[EVENT_STORAGE].hasOwnProperty(event_name)) {
+            this[EVENT_STORAGE][event_name].forEach(function (handler) {
                 handler.apply({}, params);
             });
         }
@@ -58,14 +60,22 @@ class EventEmitter {
     remove_event(event_name, handler) {
         let list = [];
 
-        if (this._events.hasOwnProperty(event_name)) {
-            each(this._events[event_name], (item, index) => {
+        if (this[EVENT_STORAGE].hasOwnProperty(event_name)) {
+            each(this[EVENT_STORAGE][event_name], (item, index) => {
                 if (item !== handler) {
                     list.push(item);
                 }
             });
 
-            this._events[event_name] = list;
+            this[EVENT_STORAGE][event_name] = list;
+        }
+    }
+
+    flush(name) {
+        if (name) {
+            this[EVENT_STORAGE][name] = [];
+        } else {
+            this[EVENT_STORAGE] = {};
         }
     }
 }

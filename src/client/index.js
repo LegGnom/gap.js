@@ -37,6 +37,8 @@ class Client extends EventEmitter {
     listen() {
         let pushState = history.pushState;
 
+        this.run();
+
         history.pushState = function(state) {
             let ps = pushState.apply(history, arguments);
             if (typeof history.onpushstate === "function") {
@@ -57,14 +59,15 @@ class Client extends EventEmitter {
             }
 
             if (hash) {
-                this.emit('change_hash', [hash]);
+                App.emit('change_hash', [hash]);
                 return;
             }
 
             if(path !== pathCursor) {
                 pathCursor = path;
-                this.emit('change_url', [path]);
-                check();
+                App.emit('change_url', [path]);
+                this.flush();
+                this.run();
             }
         }.bind(this);
 

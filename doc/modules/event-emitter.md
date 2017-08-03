@@ -22,6 +22,11 @@
 * `handler` - *Function* обработчик
 
 
+### EventEmitter.flush(name)
+Удаление всех событий
+* `name` - *String* название события, если задано, будут удалены только эти собатия 
+
+
 ```javascript
 const EventEmitter = require('gap.js/event-emitter');
 const event = new EventEmitter();

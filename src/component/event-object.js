@@ -7,7 +7,6 @@ const EventEmitter = require('../event-emitter');
 const CURSOR = Symbol('cursor');
 const IS_STOP_PROPAGATION = Symbol('is stop propagation');
 
-
 class EventObject extends EventEmitter {
     constructor(component, event_name, params) {
         let callback;
@@ -60,7 +59,10 @@ class EventObject extends EventEmitter {
         /**
          * Стек компонент по которому пройдет событие начиная от текущей компоненты
          */
-        this.stack = [component];
+        this.stack = [
+            require('../client'),
+            component
+        ];
 
 
         if (component.node) {
