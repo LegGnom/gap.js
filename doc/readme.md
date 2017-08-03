@@ -1,8 +1,7 @@
-## Для начала
-* Установка
-* Файловая структура
-* Настройка 
-* Глобальные переменные
+## Примеры
+* Компоненты
+    * [Простая компонента](examples/components/simple.md)
+    * [Определение компоненты из шаблона](examples/components/simple-run.md)
 
 
 ## Работа с сервером
@@ -15,6 +14,7 @@
 ## Подключаем БД
 * [Mongoose](db/mongoose.md)
 * [Sequelize](db/sequelize.md)
+
 
 ## Модули
 * [App](modules/app.md)

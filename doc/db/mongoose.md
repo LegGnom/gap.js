@@ -21,23 +21,19 @@ mongoose.Promise = global.Promise;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 
-const TestModel = mongoose.model('Test', {
+const UserModel = mongoose.model('user', {
     name: String
 });
 
 
-new TestModel({name: "Tim"}).save()
+new UserModel({name: "Tim"}).save()
 
 
-Router.any('/', function (request, response) {
-    response.wait(
-        TestModel.find({}).then(response.json.bind(response))
-    ).then(res => {
-        response.json(res);
-    });
-
-
-    response.send();
+Router.any('/', function *(request, response) {
+ 
+    let users = yield UserModel.find({})
+    response.json(users);
+   
 });
 
 
