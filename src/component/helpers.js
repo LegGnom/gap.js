@@ -5,7 +5,7 @@ const each = require('../helper/each');
 
 
 module.exports = {
-    get_components_by_name(env, name) {
+    getComponentsByName(env, name) {
         let result_component_list = [];
 
         if (!env || !env.length) {
@@ -55,7 +55,7 @@ module.exports = {
     },
 
 
-    run_component(component_name, parent, options=[]) {
+    runComponent(component_name, parent, options=[]) {
         let component = App.getComponent(component_name);
         if (component) {
             return new component(parent, ...options);
@@ -63,7 +63,7 @@ module.exports = {
     },
 
 
-    get_node_component(element) {
+    getNodeComponent(element) {
         let el = element;
         while(el) {
             if (el && el.tagName !== 'SCRIPT') {

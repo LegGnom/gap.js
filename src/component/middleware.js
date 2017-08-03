@@ -37,8 +37,8 @@ class Middleware extends Wait {
         }
     }
 
-    remove_event(event_name, handler) {
-        this.event_envirement.remove_event.apply(this.event_envirement, arguments);
+    removeEvent(event_name, handler) {
+        this.event_envirement.removeEvent.apply(this.event_envirement, arguments);
     }
 }
 

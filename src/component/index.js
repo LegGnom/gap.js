@@ -53,7 +53,7 @@ class Component extends Middleware {
         }
 
         if (name) {
-            return helpers.get_components_by_name(this[PARENT_LIST], name);
+            return helpers.getComponentsByName(this[PARENT_LIST], name);
         }
 
         return this[PARENT_LIST];
@@ -61,7 +61,7 @@ class Component extends Middleware {
 
 
     getParent(name) {
-        return helpers.get_components_by_name(this[PARENT_LIST], name)[0];
+        return helpers.getComponentsByName(this[PARENT_LIST], name)[0];
     }
 
 
@@ -71,14 +71,14 @@ class Component extends Middleware {
         }
 
         if (name) {
-            return helpers.get_components_by_name(this[CHILDREN_LIST], name);
+            return helpers.getComponentsByName(this[CHILDREN_LIST], name);
         }
         return this[CHILDREN_LIST];
     }
 
 
     getChildren(name) {
-        return helpers.get_components_by_name(this[CHILDREN_LIST], name)[0];
+        return helpers.getComponentsByName(this[CHILDREN_LIST], name)[0];
     }
 
 
@@ -97,7 +97,7 @@ class Component extends Middleware {
         each(App.getComponents(), item => {
             if (item.query) {
                 each(parent.querySelectorAll(item.query()), parent => {
-                    let component = helpers.run_component(item.name, parent, argv);
+                    let component = helpers.runComponent(item.name, parent, argv);
 
                     if (component && component.wait) {
                         component.wait(wait_all_component);
@@ -109,7 +109,7 @@ class Component extends Middleware {
         each(parent.querySelectorAll('[data-component]'), item => {
             if (!item.getAttribute('data-run')) {
                 let name = item.getAttribute('data-component');
-                let parent = helpers.get_node_component(item);
+                let parent = helpers.getNodeComponent(item);
                 let options = item.innerHTML;
                 let component;
 
@@ -118,7 +118,7 @@ class Component extends Middleware {
                 options = toJSON(options) || [];
 
                 item.setAttribute('data-run', '1');
-                component = helpers.run_component(name, parent, options);
+                component = helpers.runComponent(name, parent, options);
 
                 if (component && component.wait) {
                     component.wait(wait_all_component);

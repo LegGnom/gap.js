@@ -32,7 +32,7 @@ class EventEmitter {
     once(event_name, handler) {
         let once_handler = function() {
             handler.apply({}, arguments);
-            this.remove_event(event_name, once_handler);
+            this.removeEvent(event_name, once_handler);
         }.bind(this);
         this.on(event_name, once_handler);
     }
@@ -57,7 +57,7 @@ class EventEmitter {
      * @param event_name
      * @param handler
      */
-    remove_event(event_name, handler) {
+    removeEvent(event_name, handler) {
         let list = [];
 
         if (this[EVENT_STORAGE].hasOwnProperty(event_name)) {

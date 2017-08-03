@@ -60,7 +60,7 @@ Component.create('MyComponent', class extends Comment {
 * `params` - деструкторизованный список параметров передаваемый в событие
 
 
-### Component.remove_event(event_name, handler)
+### Component.removeEvent(event_name, handler)
 Удаление события с компоненты
 
 

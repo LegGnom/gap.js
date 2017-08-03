@@ -16,7 +16,7 @@
 * `params` - список параметров
 
 
-### EventEmitter.remove_event(event_name, handler)
+### EventEmitter.removeEvent(event_name, handler)
 Удаление события
 * `event_name` - *String* название события
 * `handler` - *Function* обработчик
