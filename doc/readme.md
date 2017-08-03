@@ -1,7 +1,10 @@
 ## Примеры
 * Компоненты
-    * [Простая компонента](examples/components/simple.md)
-    * [Определение компоненты из шаблона](examples/components/simple-run.md)
+    * [Простая компонента](tutorial/components/simple.md)
+    * [Определение компоненты из шаблона](tutorial/components/simple-run.md)
+    * [Вложенные компоненты их события](tutorial/components/inner-and-events.md)
+    * [Работа с потомками/родителями у компонент](tutorial/components/parent-childes.md)
+    * [Ожидание запросов](tutorial/components/request-wait.md)
 
 
 ## Работа с сервером

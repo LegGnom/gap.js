@@ -66,8 +66,10 @@ module.exports = Component.create('Validate', class extends Component {
 {{ run('Validate', [ 'phone' ]) | safe }}
 ```
 
-    Обратите внимание что на код выше, обе функции `run` привяжутся к инпуту.
+> Обратите внимание что на код выше, обе функции `run` привяжутся к инпуту.
 
 ---
 
 Назад: [Простая компонента](simple.md)
+
+Далее: [Вложенные компоненты их события](inner-and-events.md)
