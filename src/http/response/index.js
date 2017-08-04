@@ -47,6 +47,10 @@ class Response extends Wait {
 
 
     send(body, code=this.getStatus()) {
+        if (code < this.getStatus()) {
+            return;
+        }
+
         this.setBody(body);
         this.setStatus(code);
 

@@ -57,6 +57,14 @@ class Controller {
         }, 0);
     }
 
+    getRequest() {
+        return this[HTTP_REQUEST];
+    }
+
+    getResponse() {
+        return this[HTTP_RESPONSE];
+    }
+
     wait(...promise) {
         this[HTTP_RESPONSE].wait.apply(this[HTTP_RESPONSE], arguments);
         return this;
