@@ -92,22 +92,29 @@ class RouterManager {
 
     resolve(...paths) {
         let result = [];
-        let is_last_slashes = false;
+        let is_first_slash;
+        let is_last_slash;
 
-        each(paths, item => {
-            let path = clearSlashes(item);
-            let is_first_slashes = item[0] === '/';
+        paths = paths.join('');
 
-            is_last_slashes = item.substr(-1) === '/';
+        is_first_slash = paths[0] === '/';
+        is_last_slash = paths.substr(-1) === '/';
 
-            result.push(
-                (is_first_slashes ? '/' : ''),
-                path
-            );
-
+        each(paths.split('/'), item => {
+            if (item) {
+                result.push(item);
+            }
         });
 
-        return result.join('');
+        if (is_last_slash) {
+            result.push('');
+        }
+
+        if (is_first_slash) {
+            result.unshift('');
+        }
+
+        return result.join('/');
     }
 
 

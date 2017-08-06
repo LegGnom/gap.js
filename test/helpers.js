@@ -1,8 +1,8 @@
 const {assert} = require("chai");
 
-const isString = require('../lib/helper/is-string');
-const isFunction = require('../lib/helper/is-function');
-const isClass = require('../lib/helper/is-class');
+const isString = require('../helper/is-string');
+const isFunction = require('../helper/is-function');
+const isClass = require('../helper/is-class');
 
 
 describe("Helper tests: ", () => {

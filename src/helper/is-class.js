@@ -5,5 +5,5 @@ module.exports = function isClass(value) {
     let first_line = data.shift();
     let two_line = data.shift();
 
-    return first_line.includes('class ') || two_line.includes('_classCallCheck');
+    return Boolean(first_line.includes('class ') || (two_line && two_line.includes('_classCallCheck')));
 };
