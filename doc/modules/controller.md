@@ -87,15 +87,6 @@ this.renderString('<h1>{{ name }}</h1>', {
 Установа тела ответа
 
 
-### Controller.setCookie(name, value, expires=false, path='/', domain=false)
-Утсановка `Cookie` в ответ
-* `name` - *String* название
-* `value` - *String* занчение
-* `expires` - *String* время в течении которого будет доступна
-* `path` - *String* путь на котором будет установлена
-* `domain` - *String* домен на который необходимо установить 
-
-
 ### Controller.removeHeader(name)
 Удаление заголовка по имени
 
@@ -123,6 +114,19 @@ this.setHeader('sid', '...');
 
 ### Controller.getCookies()
 Возвращает весь объект cookies 
+
+
+### Controller.setCookie(name, value, expires=false, path='/', domain=false)
+Утсановка `Cookie` в ответ
+* `name` - *String* название
+* `value` - *String* занчение
+* `expires` - *String* время в течении которого будет доступна
+* `path` - *String* путь на котором будет установлена
+* `domain` - *String* домен на который необходимо установить 
+
+
+### Controller.removeCookie(name)
+Удаляет `Cookie` (возвращяет значение с заданным параметром **expires**)
 
 
 ### Controller.setHeaders(headers)

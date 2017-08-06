@@ -93,8 +93,8 @@ class Response extends Wait {
     }
 
 
-    redirect(path, code=301) {
-        let access_code = [301, 302, 303, 305, 307];
+    redirect(path, code=302) {
+        let access_code = [301, 302, 303, 305,  307];
 
         if (!access_code.includes(code)) {
             throw 'Redirect error code: ' + code + ' is not supported';
@@ -168,6 +168,12 @@ class Response extends Wait {
 
         this[RESPONSE_DATA].headers['Set-Cookie'] = cookies;
     }
+
+
+    removeCookie(name) {
+        this.setCookie(name, '', Date.now());
+    }
+
 
     getHeaders() {
         return this[RESPONSE_DATA].headers;

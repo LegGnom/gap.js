@@ -120,10 +120,6 @@ class Controller {
         this[HTTP_RESPONSE].setBody.apply(this[HTTP_RESPONSE], arguments);
     }
 
-    setCookie(name, value, expires=false, path='/', domain=false) {
-        this[HTTP_RESPONSE].setCookie.apply(this[HTTP_RESPONSE], arguments);
-    }
-
     removeHeader(name) {
         this[HTTP_RESPONSE].removeHeader.apply(this[HTTP_RESPONSE], arguments);
     }
@@ -142,6 +138,14 @@ class Controller {
 
     getCookies() {
         return this[HTTP_REQUEST].cookies;
+    }
+
+    setCookie(name, value, expires=false, path='/', domain=false) {
+        this[HTTP_RESPONSE].setCookie.apply(this[HTTP_RESPONSE], arguments);
+    }
+
+    removeCookie(name) {
+        this[HTTP_RESPONSE].removeCookie.apply(this[HTTP_RESPONSE], arguments);
     }
 
     setHeaders(headers) {
