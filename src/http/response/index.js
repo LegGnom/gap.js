@@ -100,10 +100,12 @@ class Response extends Wait {
             throw 'Redirect error code: ' + code + ' is not supported';
         }
 
-        this.setHeaders({
-            'Location': path,
-            'mimetype': 'text/html'
-        });
+        this.setHeaders(Object.assign(
+            this.getHeaders(), {
+                'Location': path,
+                'mimetype': 'text/html'
+            }
+        ));
 
         this.send([
             '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">\n',
@@ -164,7 +166,7 @@ class Response extends Wait {
 
         cookies.push(data);
 
-        this[RESPONSE_DATA].headers['Set-Cookie'] = data;
+        this[RESPONSE_DATA].headers['Set-Cookie'] = cookies;
     }
 
     getHeaders() {
