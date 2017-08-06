@@ -21,12 +21,18 @@ module.exports = function(request) {
         },
 
         end(body) {
-            let dom = document.createElement('HTML');
-            dom.innerHTML = body;
+            let dom;
+
+            if (!body) {
+                return;
+            }
 
             if (REDIRECT_STATUS_LIST.includes(this.status)) {
                 return;
             }
+
+            dom = document.createElement('HTML');
+            dom.innerHTML = body;
 
             document.replaceChild(dom, document.documentElement);
         }
