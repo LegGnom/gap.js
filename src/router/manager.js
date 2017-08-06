@@ -2,6 +2,7 @@ const RouterStorage = require("./storage");
 const isString = require("../helper/is-string");
 const isArray = require("../helper/is-array");
 const clearSlashes = require("../helper/clear-slashes");
+const each = require('../helper/each');
 
 
 const ROUTE_MANAGER_PREFIX = Symbol('route manager prefix');
@@ -89,12 +90,33 @@ class RouterManager {
     }
 
 
+    resolve(...paths) {
+        let result = [];
+        let is_last_slashes = false;
+
+        each(paths, item => {
+            let path = clearSlashes(item);
+            let is_first_slashes = item[0] === '/';
+
+            is_last_slashes = item.substr(-1) === '/';
+
+            result.push(
+                (is_first_slashes ? '/' : ''),
+                path
+            );
+
+        });
+
+        return result.join('');
+    }
+
+
     [MERGE_ROUTE_HANDLER](key) {
         let prefix = this[ROUTE_MANAGER_PREFIX];
 
         if (prefix) {
             if (isString(key) && isString(prefix)) {
-                key = prefix + clearSlashes(key) + (key.substr(-1) === '/' ? '/' : '');
+                return this.resolve(prefix, key);
             } else {
                 let prefix = isString(prefix) ? new RegExp(prefix) : prefix;
                 let key = isString(key) ? new RegExp(key) : key;
