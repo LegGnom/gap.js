@@ -1,8 +1,8 @@
 {
   "name": "gap.js",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "",
-  "main": "./lig/index.js",
+  "main": "index.js",
   "engines": {
     "node": "^6.10.0"
   },
