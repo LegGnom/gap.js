@@ -8,7 +8,7 @@ const DATA = Symbol('data');
 
 
 class RequestOptions {
-    constructor(path, method, headers, body, files) {
+    constructor(path, method, headers, body, files, proxy_list) {
         method = method.toUpperCase();
 
         if (method === 'GET') {
@@ -31,12 +31,32 @@ class RequestOptions {
         }
 
         this[DATA] = {
-            path, method, headers, body, files
+            path, method, headers, body, files, proxy_list
         }
     }
 
     get path() {
-        return this[DATA].path;
+        let path = this[DATA].path;
+        let i = 0;
+
+        for (; i < this[DATA].proxy_list.length; i++) {
+            let item = this[DATA].proxy_list[i]
+            let [from, to] = item;
+
+            if (from instanceof RegExp) {
+                if (from.test(path)) {
+                    path = to + path.replace(from, '');
+                    break;
+                }
+            } else {
+                if (path.indexOf(to) === 0) {
+                    path = to + path.replace(from, '');
+                    break;
+                }
+            }
+        }
+
+        return path;
     }
 
     get body() {

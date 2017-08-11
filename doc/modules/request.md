@@ -50,3 +50,17 @@
 * `headers` - *Object* - заголовки запроса
 * `files` - *Object|FormData* - список файлов (работает только на сервере)
 
+
+### Request.setProxy(from, to)
+Перенаправление запроса 
+* `from` - *String|RegExp* искомое значени, если является стракой ищет от начала строки точное совподение
+* `to` - *String* куда следует перенаправить
+
+```javascript
+Request.setProxy('/api/', 'http://my-site.com/api/');
+Request.get('/api/user') // -> http://my-site.com/api/user
+
+Request.setProxy(/^\/api\//, 'http://my-site.com/api/');
+Request.get('/api/user') // -> http://my-site.com/api/user
+```
+

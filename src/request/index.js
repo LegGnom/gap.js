@@ -4,7 +4,11 @@ const App = require('../app');
 const isNode = require('../helper/is-node');
 const RequestOptons = require('./request-options');
 
+
+const PROXY_LIST = [];
+
 let env;
+
 if (isNode()) {
     env = require('./request-server');
 } else {
@@ -35,7 +39,7 @@ class Request {
     }
 
     send(method, path, body, headers, files) {
-        let request = env(new RequestOptons(path, method, headers, body, files));
+        let request = env(new RequestOptons(path, method, headers, body, files, PROXY_LIST));
 
         request.promise.xhr = request.xhr;
         request.promise.abort = request.xhr.abort.bind(request.xhr);
@@ -46,6 +50,10 @@ class Request {
         });
 
         return request.promise;
+    }
+
+    setProxy(from, to) {
+        PROXY_LIST.push([from, to]);
     }
 }
 
