@@ -49,7 +49,7 @@ class RequestOptions {
                     break;
                 }
             } else {
-                if (path.indexOf(to) === 0) {
+                if (path.indexOf(from) === 0) {
                     path = to + path.replace(from, '');
                     break;
                 }
