@@ -17,6 +17,8 @@ class Proxy {
             delete request.headers['content-length'];
             delete request.headers['content-type'];
 
+            to += request.url.replace(from, '');
+
             response.wait(
                 Request[request.method.toLocaleLowerCase()](
                     to,
