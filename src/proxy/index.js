@@ -18,12 +18,14 @@ class Proxy {
         let url_options = url.parse(to);
 
         Router.any(from, function (request, response) {
-            let path = Router.resolve(to, url_options.path.replace(from, ''));
+            let path = Router.resolve(url_options.path, request.url.replace(from, ''));
 
             delete request.headers['content-length'];
             delete request.headers['content-type'];
 
-            path = url_options.protocol + url_options.host + path;
+            if (url_options.protocol && url_options.host) {
+                path = `${url_options.protocol}//${url_options.host}${path}`;
+            }
 
             response.wait(
                 Request[request.method.toLocaleLowerCase()](
