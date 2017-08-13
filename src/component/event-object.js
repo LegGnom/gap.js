@@ -91,6 +91,11 @@ class EventObject extends EventEmitter {
     }
 
 
+    isStopPropagation() {
+        return this[IS_STOP_PROPAGATION];
+    }
+
+
     /**
      * Остановить всплытие события
      */
@@ -118,9 +123,15 @@ class EventObject extends EventEmitter {
             }
 
             if (Array.isArray(components)) {
-                each(components, component => {
+                for(let i = 0; i < components.length; i++) {
+                    let component = components[i];
+
+                    if (this[IS_STOP_PROPAGATION]) {
+                        break;
+                    }
+
                     trigger(component, this.event_name, this.params);
-                });
+                }
             } else {
                 trigger(components, this.event_name, this.params);
             }
