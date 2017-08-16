@@ -15,7 +15,7 @@ module.exports = function dictToQueryString(dict, prefix) {
         if (value !== null && typeof value === "object") {
             chunk = dictToQueryString(value, key);
         } else {
-            chunk = encodeURIComponent(key) + "=" + encodeURIComponent(value);
+            chunk = key + "=" + value;
         }
 
         query.push(chunk);
