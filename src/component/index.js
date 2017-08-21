@@ -54,7 +54,7 @@ class Component extends Middleware {
 
 
     getParent(name) {
-        return helpers.getComponentsByName(this[PARENT_LIST], name)[0];
+        return this.getParents(name)[0];
     }
 
 
