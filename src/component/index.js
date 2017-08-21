@@ -18,14 +18,7 @@ class Component extends Middleware {
         this[CHILDREN_LIST] = null;
         this[PARENT_LIST] = null;
 
-        if (node) {
-            if (!node.__components__) {
-                node.classList.add('component');
-                node.__components__ = [];
-            }
-
-            node.__components__.push(this);
-        }
+        this.setComponent(node);
 
         this.node = node;
     }
@@ -79,6 +72,18 @@ class Component extends Middleware {
 
     getChildren(name) {
         return helpers.getComponentsByName(this[CHILDREN_LIST], name)[0];
+    }
+
+
+    setComponent(node) {
+        if (node) {
+            if (!node.__components__) {
+                node.classList.add('component');
+                node.__components__ = [];
+            }
+
+            node.__components__.push(this);
+        }
     }
 
 

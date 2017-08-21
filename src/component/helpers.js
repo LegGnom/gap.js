@@ -18,7 +18,7 @@ module.exports = {
 
         each(env, parent => {
             each(parent, component => {
-                if (component.constructor.name === name) {
+                if (component.constructor.component_name === name) {
                     result_component_list.push(component);
                 }
             });

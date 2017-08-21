@@ -45,6 +45,10 @@ Component.create('MyComponent', class extends Comment {
 Аналогично `getChildrens`, но возвращает первый сомпонент с соответствующим именем
 
 
+### Component.getComponent(node)
+Установить текущую компоненту в ноду
+
+
 ### Component.on(event_name, handler)
 Подписыться на событие компонент
 * `event_name` - *String* название события
