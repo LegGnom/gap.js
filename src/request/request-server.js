@@ -57,12 +57,7 @@ module.exports = function requestServer(options) {
 
             res.on('end', function () {
                 let body = response_body.join('');
-
-                if (('' + res.statusCode).match(/^2\d\d$/)) {
-                    resolve(new RequestResult(xhr.res, body));
-                } else {
-                    reject(err || body);
-                }
+                resolve(new RequestResult(xhr.res, body));
             });
         });
     });

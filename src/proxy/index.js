@@ -45,6 +45,8 @@ class Proxy {
                         response.setHeaders(res.getHeaders());
                     }
 
+                    response.setStatus(res.status);
+
                     response.setBody(res.body);
 
                 }).catch(err => {

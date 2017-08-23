@@ -21,11 +21,7 @@ module.exports = function requestClient(options) {
                 return;
             }
 
-            if (xhr.status !== 200) {
-                reject(xhr.responseText);
-            } else {
-                resolve(new RequestResult(xhr.response, xhr.responseText));
-            }
+            resolve(new RequestResult(xhr.response, xhr.responseText));
         };
 
         xhr.send(body);
