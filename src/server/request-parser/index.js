@@ -57,6 +57,7 @@ class RequestParser extends EventEmitter {
         request.once('end', () => {
             if (body.length) {
                 body = Buffer.concat(body).toString();
+                body = decodeURIComponent(body);
 
                 if (content_type.includes('x-www-form-urlencoded')) {
                     fields = parseQueryString(body);
