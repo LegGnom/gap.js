@@ -1,4 +1,3 @@
-const App = require('../app');
 const each = require('../helper/each');
 const isObject = require('../helper/is-object');
 const isArray = require('../helper/is-array');
@@ -27,7 +26,9 @@ module.exports = function load(...argv) {
                     Object.assign(config, conf);
                 }
             } catch (err) {
-                App.emit('warning', err.stack)
+                if (this.get('debug')) {
+                    console.warn(err.stack);
+                }
             }
         }
     });
