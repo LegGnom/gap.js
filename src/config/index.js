@@ -1,11 +1,9 @@
 "use strict";
 
 const ConfigStorage = require('./storage');
-const App = require('../app');
-const isObject = require('../helper/is-object');
-const isArray = require('../helper/is-array');
 const each = require('../helper/each');
 const isNode = require('../helper/is-node');
+const fileLoader = require('./file-loader');
 
 if (isNode()) {
     require('yaml-js');
@@ -51,27 +49,6 @@ module.exports =  {
 
 
     load(...argv) {
-        let config = {};
-
-        each(argv, item => {
-            if (isObject(item)) {
-                Object.assign(config, item);
-            } else {
-                try {
-                    let conf = require(item);
-                    if (isArray(conf)) {
-                        each(conf, param => {
-                            Object.assign(config, param);
-                        });
-                    } else {
-                        Object.assign(config, conf);
-                    }
-                } catch (err) {
-                    App.emit('error', err.stack)
-                }
-            }
-        });
-
-        Object.assign(ConfigStorage, config);
+        return fileLoader.apply(this, argv);
     }
 };
