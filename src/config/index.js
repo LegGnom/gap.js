@@ -2,12 +2,7 @@
 
 const ConfigStorage = require('./storage');
 const each = require('../helper/each');
-const isNode = require('../helper/is-node');
 const fileLoader = require('./file-loader');
-
-if (isNode()) {
-    require('yaml-js');
-}
 
 
 module.exports =  {

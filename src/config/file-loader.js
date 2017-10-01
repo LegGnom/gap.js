@@ -1,7 +1,13 @@
 const App = require('../app');
+const each = require('../helper/each');
 const isObject = require('../helper/is-object');
 const isArray = require('../helper/is-array');
+const isNode = require('../helper/is-node');
 const ConfigStorage = require('./storage');
+
+if (isNode()) {
+    require('yaml-js');
+}
 
 
 module.exports = function load(...argv) {
