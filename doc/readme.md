@@ -41,3 +41,4 @@
 * [Server](modules/server.md)
 * [View](modules/view.md)
 * [Wait](modules/wait.md)
+* [StateMachine](modules/state-machine.md)

@@ -12,8 +12,8 @@ const PARENT_LIST = Symbol('parent list');
 
 class Component extends Middleware {
 
-    constructor(node) {
-        super();
+    constructor(node, state) {
+        super(state);
 
         this[CHILDREN_LIST] = null;
         this[PARENT_LIST] = null;

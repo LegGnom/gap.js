@@ -1,12 +1,12 @@
 "use strict";
 
-
-const COMPONENT_COLLECTION = Symbol('component collection');
-const TEMPLATE_ENGINE = Symbol('template engine');
 const EventEmitter = require('../event-emitter');
 const Logger = require('../logger');
 
 const logger = new Logger();
+
+const COMPONENT_COLLECTION = Symbol('component collection');
+const TEMPLATE_ENGINE = Symbol('template engine');
 
 
 class App extends EventEmitter {
@@ -15,7 +15,6 @@ class App extends EventEmitter {
 
         this[COMPONENT_COLLECTION] = {};
         this[TEMPLATE_ENGINE] = null;
-
 
         this.on('error', message => logger.error(message));
         this.on('warning', message => logger.warning(message));
