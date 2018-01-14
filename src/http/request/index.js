@@ -24,17 +24,31 @@ class Request {
         };
     }
 
+    get raw() {
+        return this[HTTP_REQUEST];
+    }
 
     get method() {
-        return this[HTTP_REQUEST].method;
+        return this.raw.method;
     }
 
     get url() {
-        return this[HTTP_REQUEST].url;
+        return this.raw.url;
     }
 
     get headers() {
-        return this[HTTP_REQUEST].headers;
+        return this.raw.headers;
+    }
+
+    get ip() {
+        return this.headers['x-forwarded-for'] ||
+            this.raw.connection.remoteAddress ||
+            this.raw.socket.remoteAddress ||
+            (this.raw.connection.socket ? this.raw.connection.socket.remoteAddress : null);
+    }
+
+    get socket() {
+        return this.raw.socket;
     }
 
     get cookies() {
