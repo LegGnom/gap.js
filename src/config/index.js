@@ -10,6 +10,20 @@ module.exports =  {
     delimiter: '.',
 
 
+    argvInit() {
+        let process = process || {
+            argv: []
+        };
+
+        each(process.argv, item => {
+            if (item.indexOf('--') == 0) {
+                let vars = item.replace('--', '').split('=');
+                this.set(vars[0], vars[1]);
+            }
+        })
+    },
+
+
     get(key, _default) {
         let storage = ConfigStorage;
         each(key.split(this.delimiter), part => {
