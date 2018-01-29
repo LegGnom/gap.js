@@ -11,10 +11,6 @@ module.exports =  {
 
 
     argvInit() {
-        let process = process || {
-            argv: []
-        };
-
         each(process.argv, item => {
             if (item.indexOf('--') == 0) {
                 let vars = item.replace('--', '').split('=');
