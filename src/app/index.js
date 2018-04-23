@@ -13,7 +13,7 @@ class App extends EventEmitter {
     constructor() {
         super();
 
-        this[COMPONENT_COLLECTION] = {};
+        this[COMPONENT_COLLECTION] = new Map();
         this[TEMPLATE_ENGINE] = null;
 
         this.on('error', message => logger.error(message));
@@ -21,7 +21,7 @@ class App extends EventEmitter {
     }
 
     addComponent(name, _class) {
-        this[COMPONENT_COLLECTION][name] = _class;
+        this[COMPONENT_COLLECTION].set(name, _class);
     }
 
     getComponents() {
@@ -29,11 +29,11 @@ class App extends EventEmitter {
     }
 
     getComponent(name) {
-        return this[COMPONENT_COLLECTION][name];
+        return this[COMPONENT_COLLECTION].get(name);
     }
 
     removeComponent(name) {
-        delete this[COMPONENT_COLLECTION][name];
+        delete this[COMPONENT_COLLECTION].delete(name);
     }
 
     getTemplateEngine() {
