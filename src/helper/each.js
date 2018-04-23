@@ -12,10 +12,8 @@ module.exports = function each(list, handler) {
     }
 
     if (is_iterator(list)) {
-        let index = 0;
         for (let [key, value] of list) {
-            handler([key, value], index);
-            index++;
+            handler(value, key);
         }
 
     } else {
