@@ -1,3 +1,3 @@
 module.exports = function isIterator(value) {
-    return Object.prototype.toString.call(value) === '[object Iterator]';
+    return ['[object Iterator]', '[object Map]'].includes(Object.prototype.toString.call(value));
 };
