@@ -99,10 +99,10 @@ class Component extends Middleware {
             end = resolve;
         });
 
-        each(App.getComponents(), item => {
-            if (item.query) {
-                each(parent.querySelectorAll(item.query()), parent => {
-                    let component = helpers.runComponent(item.name, parent);
+        each(App.getComponents(), instance => {
+            if (instance.query) {
+                each(parent.querySelectorAll(instance.query()), node => {
+                    let component = new instance(node);
 
                     if (component && component.wait) {
                         component.wait(wait_all_component);
