@@ -102,7 +102,7 @@ class Component extends Middleware {
         each(App.getComponents(), item => {
             if (item.query) {
                 each(parent.querySelectorAll(item.query()), parent => {
-                    let component = helpers.runComponent(item.name, parent, argv);
+                    let component = helpers.runComponent(item.name, parent);
 
                     if (component && component.wait) {
                         component.wait(wait_all_component);
