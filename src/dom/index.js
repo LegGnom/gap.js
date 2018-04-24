@@ -50,6 +50,20 @@ module.exports = {
 
 
     /**
+     * Найти ближайшего родителя и удолить
+     * @param node
+     * @param selector
+     */
+    closestAndRemove(node, selector) {
+        const parent = this.closest(node, selector);
+
+        if (parent) {
+            this.remove(parent);
+        }
+    },
+
+
+    /**
      * Удалить обертку (родителя) у элемента
      * @param element
      */
@@ -58,6 +72,15 @@ module.exports = {
             element.parentNode.insertBefore(child, element);
         });
         element.parentNode.removeChild(element);
+    },
+
+
+    /**
+     * Удалить элемент
+     * @param node
+     */
+    remove(node) {
+        node.parentNode.removeChild(node);
     },
 
 

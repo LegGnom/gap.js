@@ -1,6 +1,7 @@
 "use strict";
 
 const App = require('../app');
+const isArray = require('../helper/is-array');
 const each = require('../helper/each');
 
 
@@ -57,6 +58,11 @@ module.exports = {
 
     runComponent(component_name, parent, options=[]) {
         let component = App.getComponent(component_name);
+
+        if (!isArray(options)) {
+            throw 'Component options must be an array';
+        }
+
         if (component) {
             return new component(parent, ...options);
         }

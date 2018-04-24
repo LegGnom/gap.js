@@ -12,6 +12,7 @@ npm-debug.log
 /controller/
 /dom/
 /event-emitter/
+/state-machine/
 /file-storage/
 /form/
 /helper/
