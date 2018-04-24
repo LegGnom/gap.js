@@ -37,7 +37,7 @@ class Model {
                 }
             }
 
-            settingsField.value = field.value;
+            settingsField.value = field.value || null;
             settingsField.normalize = field.normalize || [];
             settingsField.validators = field.validators || [];
 
@@ -157,7 +157,7 @@ class Model {
         const form = new FormData
 
         each(Object.keys(this[MODEL]), key => {
-            let value = this[MODEL][key];
+            let value = this[MODEL][key].value;
 
             if (isArray(value)) {
                 value = value.join(',');
