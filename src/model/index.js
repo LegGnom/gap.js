@@ -3,16 +3,13 @@ const isArray = require('../helper/is-array');
 const toJSON = require('../helper/to-json');
 const each = require('../helper/each');
 
-
-const TIMER_INTERVAL = 1;
+const Subscribers = require('./subscribers');
 
 const MODEL = Symbol('model');
 const KEYS = Symbol('keys');
 const VALIDATE_FIELD_HANDLER = Symbol('validate field handler');
 const NORMALIZE_FIELD_HANDLER = Symbol('normalize field handler');
 const SUBSCRIBERS = Symbol('subscribers');
-const TRIGGER = Symbol('trigger');
-const TIMER_MODEL = 0;
 
 
 const METHODS = [
@@ -21,10 +18,10 @@ const METHODS = [
 ];
 
 
-function makeModel(item, subscriber) {
+function makeModel(item, instanceSubscribers) {
     if (isArray(item)) {
         item = new ArrayModel(...item);
-        item.subscribe(subscriber);
+        item.attach(instanceSubscribers);
     }
 
     if (isObject(item)) {
@@ -32,7 +29,7 @@ function makeModel(item, subscriber) {
             item = new Model(item);
         }
 
-        item.subscribe(subscriber);
+        item.attach(instanceSubscribers);
     }
 
     return item;
@@ -41,17 +38,10 @@ function makeModel(item, subscriber) {
 
 class ArrayModel extends Array {
     constructor(...args) {
-        let timer = 0;
-
-        const SUBSCRIBERS = [];
-        const trigger = () => {
-            each(SUBSCRIBERS, item => {
-                item(this);
-            });
-        };
+        let sub = new Subscribers();
 
         args.map(item => {
-            return makeModel(item, trigger);
+            return makeModel(item, sub);
         });
 
         super(...args);
@@ -61,7 +51,7 @@ class ArrayModel extends Array {
         };
 
         this.subscribe = (handler) =>  {
-            SUBSCRIBERS.push(handler);
+            sub.push(handler);
             return this;
         };
 
@@ -73,18 +63,19 @@ class ArrayModel extends Array {
             throw 'ArrayModel does not support the method toForm';
         };
 
+        this.attach = (instanceSubscribers) => {
+            sub = instanceSubscribers.append(sub.getHandlers());
+        };
+
         METHODS.forEach(key => {
             this[key] = (...args) => {
                 super[key](...args);
-                clearTimeout(timer);
 
-                setTimeout(() => {
-                    for(let i = 0; i < this.length; i++) {
-                        this[i] = makeModel(this[i], trigger);
-                    }
-                }, TIMER_INTERVAL);
+                for(let i = 0; i < this.length; i++) {
+                    this[i] = makeModel(this[i], sub);
+                }
 
-                timer = setTimeout(trigger, TIMER_INTERVAL);
+                sub.trigger();
             }
         });
     }
@@ -101,11 +92,9 @@ class Model {
             throw 'The model must be an object';
         }
 
-        this[TIMER_MODEL] = 0;
-
         this[MODEL] = {};
         this[KEYS] = [];
-        this[SUBSCRIBERS] = [];
+        this[SUBSCRIBERS] = new Subscribers();
 
         each(Object.keys(model), key => {
             let field = model[key];
@@ -122,7 +111,7 @@ class Model {
                 }
             }
 
-            field.value = makeModel(field.value, this[TRIGGER].bind(this));
+            field.value = makeModel(field.value, this[SUBSCRIBERS]);
 
             settingsField.value = field.value || null;
             settingsField.normalize = field.normalize || [];
@@ -147,15 +136,6 @@ class Model {
                     return this[MODEL][key].value;
                 }
             });
-        });
-    }
-
-    /**
-     * Запуск подписчеков, после изменения модели
-     */
-    [TRIGGER]() {
-        each(this[SUBSCRIBERS], item => {
-            item(this);
         });
     }
 
@@ -200,8 +180,6 @@ class Model {
      * @returns {Model}
      */
     patchValue(model) {
-        clearTimeout(this[TIMER_MODEL]);
-
         each(Object.keys(model), key => {
             let value = model[key];
             if (!this[KEYS].includes(key)) {
@@ -225,7 +203,7 @@ class Model {
             this[MODEL][key].value = value;
         });
 
-        this[TIMER_MODEL] = setTimeout(this[TRIGGER].bind(this), TIMER_INTERVAL);
+        this[SUBSCRIBERS].trigger();
         return this;
     }
 
@@ -238,6 +216,14 @@ class Model {
         this[SUBSCRIBERS].push(handler);
         return this;
     }
+
+    /**
+     * Передать управление подписчиками родителю
+     * @param instanceSubscribers
+     */
+    attach(instanceSubscribers) {
+        this[SUBSCRIBERS] = instanceSubscribers.append(this[SUBSCRIBERS].getHandlers());
+    };
 
     /**
      * Возвращает чистый объект
