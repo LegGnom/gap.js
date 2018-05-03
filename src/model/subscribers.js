@@ -41,6 +41,6 @@ module.exports = class Subscribers {
     }
 
     getHandlers() {
-        return [...this[PRIMARY], this[SECONDARY]];
+        return [...this[PRIMARY], ...this[SECONDARY]];
     }
 }
