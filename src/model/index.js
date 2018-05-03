@@ -40,16 +40,11 @@ function makeModel(item, subscriber) {
 
 
 class ArrayModel extends Array {
-
     constructor(...args) {
         let timer = 0;
 
         const SUBSCRIBERS = [];
         const trigger = () => {
-            each(this, item => {
-                makeModel(item, trigger);
-            });
-
             each(SUBSCRIBERS, item => {
                 item(this);
             });
@@ -82,6 +77,13 @@ class ArrayModel extends Array {
             this[key] = (...args) => {
                 super[key](...args);
                 clearTimeout(timer);
+
+                setTimeout(() => {
+                    this.map(item => {
+                        return makeModel(item, trigger);
+                    });
+                }, TIMER_INTERVAL);
+
                 timer = setTimeout(trigger, TIMER_INTERVAL);
             }
         });
