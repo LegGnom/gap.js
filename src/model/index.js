@@ -24,9 +24,12 @@ function makeModel(item, subscriber) {
         item.subscribe(subscriber);
     }
 
-    if (isObject(item) && !(item instanceof Model)) {
-        item = new Model(item);
-        item.subscribe(subscriber)
+    if (isObject(item)) {
+        if (!(item instanceof Model)) {
+            item = new Model(item);
+        }
+
+        item.subscribe(subscriber);
     }
 
     return item;
@@ -116,8 +119,13 @@ class Model {
 
             Object.defineProperty(this, key, {
                 set(value) {
+                    if (this[MODEL][key].value === value) {
+                        return
+                    }
+
                     const data = {};
                     data[key] = value;
+
                     this.patchValue(data);
                 },
 
