@@ -64,7 +64,8 @@ class ArrayModel extends Array {
         };
 
         this.attach = (instanceSubscribers) => {
-            sub = instanceSubscribers.append(sub.getHandlers());
+            instanceSubscribers.append(sub.getHandlers());
+            sub = instanceSubscribers;
         };
 
         METHODS.forEach(key => {
