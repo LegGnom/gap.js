@@ -42,6 +42,7 @@ module.exports = class Subscribers {
 
     getHandlers() {
         clearTimeout(this[TIMER]);
-        return [...this[PRIMARY], ...this[SECONDARY]];
+
+        return this[PRIMARY].concat(this[SECONDARY]);
     }
 }
