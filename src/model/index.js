@@ -64,8 +64,10 @@ class ArrayModel extends Array {
         };
 
         this.attach = (instanceSubscribers) => {
-            instanceSubscribers.append(sub.getHandlers());
-            sub = instanceSubscribers;
+            if (instanceSubscribers !== sub) {
+                instanceSubscribers.append(sub.getHandlers());
+                sub = instanceSubscribers;
+            }
         };
 
         METHODS.forEach(key => {
@@ -223,8 +225,10 @@ class Model {
      * @param instanceSubscribers
      */
     attach(instanceSubscribers) {
-        instanceSubscribers.append(this[SUBSCRIBERS].getHandlers());
-        this[SUBSCRIBERS] = instanceSubscribers;
+        if (instanceSubscribers !== this[SUBSCRIBERS]) {
+            instanceSubscribers.append(this[SUBSCRIBERS].getHandlers());
+            this[SUBSCRIBERS] = instanceSubscribers;
+        }
     };
 
     /**
