@@ -47,7 +47,7 @@ class ArrayModel extends Array {
         };
 
         args.map(item => {
-            return makeModel(item, trigger.bind(this));
+            return makeModel(item, trigger);
         });
 
         super(...args);
@@ -72,6 +72,11 @@ class ArrayModel extends Array {
         METHODS.forEach(key => {
             this[key] = (...args) => {
                 super[key](...args);
+
+                each(this, item => {
+                    makeModel(item, trigger);
+                });
+
                 trigger();
             }
         });
