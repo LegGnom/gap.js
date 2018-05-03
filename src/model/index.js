@@ -4,12 +4,15 @@ const toJSON = require('../helper/to-json');
 const each = require('../helper/each');
 
 
+const TIMER_INTERVAL = 1;
+
 const MODEL = Symbol('model');
 const KEYS = Symbol('keys');
 const VALIDATE_FIELD_HANDLER = Symbol('validate field handler');
 const NORMALIZE_FIELD_HANDLER = Symbol('normalize field handler');
 const SUBSCRIBERS = Symbol('subscribers');
 const TRIGGER = Symbol('trigger');
+const TIMER_MODEL = 0;
 
 
 const METHODS = [
@@ -39,8 +42,14 @@ function makeModel(item, subscriber) {
 class ArrayModel extends Array {
 
     constructor(...args) {
+        let timer = 0;
+
         const SUBSCRIBERS = [];
         const trigger = () => {
+            each(this, item => {
+                makeModel(item, trigger);
+            });
+
             each(SUBSCRIBERS, item => {
                 item(this);
             });
@@ -72,12 +81,8 @@ class ArrayModel extends Array {
         METHODS.forEach(key => {
             this[key] = (...args) => {
                 super[key](...args);
-
-                each(this, item => {
-                    makeModel(item, trigger);
-                });
-
-                trigger();
+                clearTimeout(timer);
+                timer = setTimeout(trigger, TIMER_INTERVAL);
             }
         });
     }
@@ -93,6 +98,8 @@ class Model {
         if (!isObject(model)) {
             throw 'The model must be an object';
         }
+
+        this[TIMER_MODEL] = 0;
 
         this[MODEL] = {};
         this[KEYS] = [];
@@ -191,6 +198,8 @@ class Model {
      * @returns {Model}
      */
     patchValue(model) {
+        clearTimeout(this[TIMER_MODEL]);
+
         each(Object.keys(model), key => {
             let value = model[key];
             if (!this[KEYS].includes(key)) {
@@ -214,7 +223,7 @@ class Model {
             this[MODEL][key].value = value;
         });
 
-        this[TRIGGER]();
+        this[TIMER_MODEL] = setTimeout(this[TRIGGER].bind(this), TIMER_INTERVAL);
         return this;
     }
 
