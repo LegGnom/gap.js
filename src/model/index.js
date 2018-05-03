@@ -3,6 +3,8 @@ const isArray = require('../helper/is-array');
 const toJSON = require('../helper/to-json');
 const each = require('../helper/each');
 
+const makeModel = require('./make-model');
+
 
 const MODEL = Symbol('model');
 const KEYS = Symbol('keys');
@@ -33,9 +35,11 @@ class Model {
 
             if (!isObject(field)) {
                 field = {
-                    value: field
+                    value: field,
                 }
             }
+
+            field.value = makeModel(field.value);
 
             settingsField.value = field.value || null;
             settingsField.normalize = field.normalize || [];
@@ -63,7 +67,7 @@ class Model {
      */
     [TRIGGER]() {
         each(this[SUBSCRIBERS], item => {
-            item(this[MODEL]);
+            item(this);
         });
     }
 
@@ -116,6 +120,14 @@ class Model {
 
             if (!this[VALIDATE_FIELD_HANDLER](key, value)) {
                 throw `A non-valid value was passed in the field (${key})`;
+            }
+
+            if (isArray(value)) {
+                value = new ArrayModel(value);
+            }
+
+            if (isObject(value)) {
+                value = new Model(value);
             }
 
             value = this[NORMALIZE_FIELD_HANDLER](key, value);
