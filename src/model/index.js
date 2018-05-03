@@ -79,9 +79,9 @@ class ArrayModel extends Array {
                 clearTimeout(timer);
 
                 setTimeout(() => {
-                    this.map(item => {
-                        return makeModel(item, trigger);
-                    });
+                    for(let i = 0; i < this.length; i++) {
+                        this[i] = makeModel(this[i], trigger);
+                    }
                 }, TIMER_INTERVAL);
 
                 timer = setTimeout(trigger, TIMER_INTERVAL);
