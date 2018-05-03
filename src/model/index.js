@@ -36,26 +36,25 @@ function makeModel(item, subscriber) {
 class ArrayModel extends Array {
 
     constructor(...args) {
-        args.map(item => {
-            return makeModel(item, this[TRIGGER].bind(this));
-        });
-
-        super(...args);
-
-        this[SUBSCRIBERS] = [];
-
-        this[TRIGGER] = () => {
-            each(this[SUBSCRIBERS], item => {
+        const SUBSCRIBERS = [];
+        const trigger = () => {
+            each(SUBSCRIBERS, item => {
                 item(this);
             });
         };
+
+        args.map(item => {
+            return makeModel(item, trigger.bind(this));
+        });
+
+        super(...args);
 
         this.patchValue = (model) => {
             throw 'ArrayModel does not support the method patchValue';
         };
 
         this.subscribe = (handler) =>  {
-            this[SUBSCRIBERS].push(handler);
+            SUBSCRIBERS.push(handler);
             return this;
         };
 
@@ -70,7 +69,7 @@ class ArrayModel extends Array {
         METHODS.forEach(key => {
             this[key] = (...args) => {
                 super[key](...args);
-                this[TRIGGER]();
+                trigger();
             }
         });
     }
