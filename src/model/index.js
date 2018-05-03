@@ -18,13 +18,15 @@ const METHODS = [
 ];
 
 
-function makeModel(item) {
+function makeModel(item, subscriber) {
     if (isArray(item)) {
-        return new ArrayModel(...item);
+        item = new ArrayModel(...item);
+        item.subscribe(subscriber);
     }
 
     if (isObject(item) && !(item instanceof Model)) {
-        return new Model(item);
+        item = new Model(item);
+        item.subscribe(subscriber)
     }
 
     return item;
@@ -35,7 +37,7 @@ class ArrayModel extends Array {
 
     constructor(...args) {
         args.map(item => {
-            return makeModel(item);
+            return makeModel(item, this[TRIGGER].bind(this));
         });
 
         super(...args);
@@ -104,7 +106,7 @@ class Model {
                 }
             }
 
-            field.value = makeModel(field.value);
+            field.value = makeModel(field.value, this[TRIGGER].bind(this));
 
             settingsField.value = field.value || null;
             settingsField.normalize = field.normalize || [];
