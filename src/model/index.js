@@ -42,38 +42,35 @@ class ArrayModel extends Array {
 
         this[SUBSCRIBERS] = [];
 
+        this[TRIGGER] = () => {
+            each(this[SUBSCRIBERS], item => {
+                item(this);
+            });
+        };
+
+        this.patchValue = (model) => {
+            throw 'ArrayModel does not support the method patchValue';
+        };
+
+        this.subscribe = (handler) =>  {
+            this[SUBSCRIBERS].push(handler);
+            return this;
+        };
+
+        this.toObject = () => {
+            throw 'ArrayModel does not support the method toObject';
+        };
+
+        this.toForm = () => {
+            throw 'ArrayModel does not support the method toForm';
+        };
+
         METHODS.forEach(key => {
             this[key] = (...args) => {
                 super[key](...args);
                 this[TRIGGER]();
             }
         });
-    }
-
-    /**
-     * Запуск подписчеков, после изменения модели
-     */
-    [TRIGGER]() {
-        each(this[SUBSCRIBERS], item => {
-            item(this);
-        });
-    }
-
-    patchValue(model) {
-        throw 'ArrayModel does not support the method patchValue';
-    }
-
-    subscribe(handler) {
-        this[SUBSCRIBERS].push(handler);
-        return this;
-    }
-
-    toObject() {
-        throw 'ArrayModel does not support the method toObject';
-    }
-
-    toForm() {
-        throw 'ArrayModel does not support the method toForm';
     }
 }
 
