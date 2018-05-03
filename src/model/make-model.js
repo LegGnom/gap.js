@@ -1,3 +1,6 @@
+const isObject = require('../helper/is-object');
+const isArray = require('../helper/is-array');
+
 const ArrayModel = require('./array-model');
 const Model = require('./index');
 
