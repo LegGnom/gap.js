@@ -223,7 +223,8 @@ class Model {
      * @param instanceSubscribers
      */
     attach(instanceSubscribers) {
-        this[SUBSCRIBERS] = instanceSubscribers.append(this[SUBSCRIBERS].getHandlers());
+        instanceSubscribers.append(this[SUBSCRIBERS].getHandlers());
+        this[SUBSCRIBERS] = instanceSubscribers;
     };
 
     /**
