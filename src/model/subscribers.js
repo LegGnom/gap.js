@@ -4,7 +4,7 @@ const isFunction = require('../helper/is-function');
 const PRIMARY = Symbol('primary');
 const SECONDARY = Symbol('secondary');
 const TIMER = 0;
-const INTERVAL = 1;
+const INTERVAL = 10;
 
 
 module.exports = class Subscribers {
@@ -41,6 +41,7 @@ module.exports = class Subscribers {
     }
 
     getHandlers() {
+        clearTimeout(this[TIMER]);
         return [...this[PRIMARY], ...this[SECONDARY]];
     }
 }
