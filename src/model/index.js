@@ -72,13 +72,15 @@ class ArrayModel extends Array {
 
         METHODS.forEach(key => {
             this[key] = (...args) => {
-                super[key](...args);
+                const result = super[key](...args);
 
                 for(let i = 0; i < this.length; i++) {
                     this[i] = makeModel(this[i], sub);
                 }
 
                 sub.trigger();
+
+                return result;
             }
         });
     }
