@@ -194,7 +194,7 @@ class Model {
             }
 
             if (isArray(value)) {
-                value = new ArrayModel(value);
+                value = new ArrayModel(...value);
             }
 
             if (isObject(value)) {
