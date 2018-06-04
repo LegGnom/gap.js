@@ -13,7 +13,7 @@ const SUBSCRIBERS = Symbol('subscribers');
 
 
 const METHODS = [
-    "concat", "copyWithin", "entries", "fill", "map", "pop", "push", "reduce",
+    "concat", "copyWithin", "entries", "fill", "pop", "push", "reduce",
     "reduceRight", "reverse", "shift", "slice", "sort", "splice", "unshift"
 ];
 
