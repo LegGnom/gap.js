@@ -71,7 +71,7 @@ class Component extends Middleware {
 
 
     getChildren(name) {
-        return helpers.getComponentsByName(this[CHILDREN_LIST], name)[0];
+        return this.getChildrens(name)[0];
     }
 
 
